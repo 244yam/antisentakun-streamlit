@@ -2,20 +2,21 @@ import streamlit as st
 import pandas as pd
 from Bio.Seq import Seq
 from Bio.SeqUtils import GC
+import base64
 
 st.header('アンチ選択くん')
 id1 = st.sidebar.text_input('遺伝子名','Gapdh')
-seq1 = st.sidebar.text_input('主配列を入力','AAAAGGATATATATAGATAGAGATAGA')
+seq1 = st.sidebar.text_input('主配列を入力','AAAAGGAT')
 seq2 = st.sidebar.text_input('参照配列1（Ref1）を入力','ATAGA')
 seq3 = st.sidebar.text_input('参照配列2（Ref2）を入力','ATATAGATAGAGATAGA')
 
 seq1 = Seq(seq1.upper())
 seq2 = Seq(seq2.upper())
 seq3 = Seq(seq3.upper())
-numr = st.sidebar.slider('右翼', 0, 1,5)
-gap = st.sidebar.slider('右翼',0,1,15)
-numl = st.sidebar.slider('左翼',0,1,5)
-tail = st.sidebar.slider('テイル',0,1,5)
+numr = st.sidebar.slider('右翼の数', 0, 5,3)
+gap = st.sidebar.slider('右翼の数',0,15,8)
+numl = st.sidebar.slider('左翼の数',0,5,3)
+tail = st.sidebar.slider('テイルの数',0,5,0)
 
 
 st.sidebar.write('ASO鎖長',int(numr)+int(gap)+int(numl)+int(tail))
@@ -45,3 +46,8 @@ for i in range(len(seq1)-(int(numr)+int(gap)+int(numl)+int(tail)+1)):
     list_df = list_df.append( tmp_se, ignore_index=True )
 
 st.dataframe(list_df)
+
+csv = list_df.to_csv(index=False)  
+b64 = base64.b64encode(csv.encode()).decode()
+href = f'<a href="data:application/octet-stream;base64,{b64}" download="result.csv">download</a>'
+st.markdown(f" CSVとしてダウンロードする： {href}", unsafe_allow_html=True)
