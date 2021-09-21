@@ -12,10 +12,11 @@ seq3 = st.sidebar.text_input('参照配列2（Ref2）を入力','ATATAGATAGAGATA
 seq1 = Seq(seq1.upper())
 seq2 = Seq(seq2.upper())
 seq3 = Seq(seq3.upper())
-numr = st.sidebar.text_input('右翼',3)
-gap = st.sidebar.text_input('右翼',8)
-numl = st.sidebar.text_input('左翼',3)
-tail = st.sidebar.text_input('テイル',0)
+numr = st.sidebar.slider('右翼', 0, 1,5)
+gap = st.sidebar.slider('右翼',0,1,15)
+numl = st.sidebar.slider('左翼',0,1,5)
+tail = st.sidebar.slider('テイル',0,1,5)
+
 
 st.sidebar.write('ASO鎖長',int(numr)+int(gap)+int(numl)+int(tail))
 st.write('配列長:',len(seq1))
