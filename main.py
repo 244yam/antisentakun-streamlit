@@ -6,7 +6,7 @@ import base64
 
 st.header('アンチ選択くん')
 id1 = st.sidebar.text_input('遺伝子名','Gapdh')
-id2 = st.sidebar.text_input('Suffix（例：-ASO(19)）','')
+id2 = st.sidebar.text_input('Suffix（例：ASO(14)）','ASO(14)')
 seq1 = st.sidebar.text_input('主配列を入力（例：AAATGGT...）','')
 seq2 = st.sidebar.text_input('比較配列1（Ref1）を入力（例：AAATGGT...）','')
 seq3 = st.sidebar.text_input('比較配列2（Ref2）を入力（例：AAATGGT...）','')
