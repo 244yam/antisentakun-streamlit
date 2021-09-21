@@ -6,6 +6,7 @@ import base64
 
 st.header('アンチ選択くん')
 id1 = st.sidebar.text_input('遺伝子名','Gapdh')
+id2 = st.sidebar.text_input('Suffix（例：-ASO(19)）','')
 seq1 = st.sidebar.text_input('主配列を入力（例：AAATGGT...）','')
 seq2 = st.sidebar.text_input('比較配列1（Ref1）を入力（例：AAATGGT...）','')
 seq3 = st.sidebar.text_input('比較配列2（Ref2）を入力（例：AAATGGT...）','')
@@ -32,7 +33,7 @@ list_df = pd.DataFrame( columns=['ID','左翼','ASO全体','右翼','GC%','cpg i
 #リスト追加（Seqクラスはstrに直してから使う）
 for i in range(len(seq1)-(int(numr)+int(gap)+int(numl)+int(tail))+1):
     tmp_se = pd.Series( 
-    [id1+"-"+str(i+1)+"-ASO" ,  seq1r[i:i+int(numr)],
+    [id1+"-"+str(i+1)+"-"+id2 ,  seq1r[i:i+int(numr)],
     seq1r[i:i+int(numr)]
     +seq1r[i+int(numr): i+int(numr)+int(gap)].lower()
     +seq1r[i+ int(numr)+ int(gap):i+ int(numr)+ int(gap)+ int(numl)]
