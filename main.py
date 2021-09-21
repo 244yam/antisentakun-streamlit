@@ -6,7 +6,7 @@ import base64
 
 st.header('アンチ選択くん')
 id1 = st.sidebar.text_input('遺伝子名','Gapdh')
-seq1 = st.sidebar.text_input('主配列を入力','AAAAGGAT')
+seq1 = st.sidebar.text_input('主配列を入力','GTCCGGATGCTGCGCCTGCGGTAGAGCGGCCGCCATGTTGCAACCGGGAAGGAAATGAATGGGCAGCCGTTAGGAAAGCCTGCCGGTGACTAACCCTGCGCTCCTGCCTCGATGGGTGGAGTCGCGTGTGGCGGGGAAGTCAGGTGGAGCGAGGCTAGCTGGCCC')
 seq2 = st.sidebar.text_input('参照配列1（Ref1）を入力','ATAGA')
 seq3 = st.sidebar.text_input('参照配列2（Ref2）を入力','ATATAGATAGAGATAGA')
 
@@ -28,15 +28,16 @@ seq2r=str(seq2.reverse_complement())
 seq3r=str(seq3.reverse_complement())
 
 #emptyリスト
-list_df = pd.DataFrame( columns=['ID','ASO','GC%','cpg in gap','hom vs ref1', 'hom vs ref2'] )
+list_df = pd.DataFrame( columns=['ID','右翼','ASO全体','左翼','GC%','cpg in gap','hom vs ref1', 'hom vs ref2'] )
 #リスト追加（Seqクラスはstrに直してから使う）
 for i in range(len(seq1)-(int(numr)+int(gap)+int(numl)+int(tail)+1)):
     tmp_se = pd.Series( 
-    [id1+"-"+str(i+1)+"-ASO" , 
+    [id1+"-"+str(i+1)+"-ASO" ,  seq1r[i:i+int(numr)],
     seq1r[i:i+int(numr)]
     +seq1r[i+int(numr): i+int(numr)+int(gap)].lower()
     +seq1r[i+ int(numr)+ int(gap):i+ int(numr)+ int(gap)+ int(numl)]
     +seq1r[i+ int(numr)+ int(gap)+ int(numl):i+ int(numr)+ int(gap)+ int(numl)+int(tail)].lower(),
+    seq1r[i+ int(numr)+ int(gap):i+ int(numr)+ int(gap)+ int(numl)],
     GC(seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))]),
      "cg" in seq1r[i+int(numr): i+int(numr)+int(gap)].lower(),
      seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))] in seq2r,
