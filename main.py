@@ -28,7 +28,7 @@ seq2r=str(seq2.reverse_complement())
 seq3r=str(seq3.reverse_complement())
 
 #emptyリスト
-list_df = pd.DataFrame( columns=['ID','左翼',"ASO全体（5' to 3'）",'右翼','GC%','cpg in gap','hom vs ref1', 'hom vs ref2'] )
+list_df = pd.DataFrame( columns=['ID','左翼',"ASO（5'to3'）",'右翼','GC%','cpg in gap','hom vs ref1', 'hom vs ref2'] )
 #リスト追加（Seqクラスはstrに直してから使う）
 for i in range(len(seq1)-(int(numr)+int(gap)+int(numl)+int(tail))+1):
     tmp_se = pd.Series( 
