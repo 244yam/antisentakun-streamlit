@@ -21,18 +21,19 @@ tail = st.sidebar.slider('テイルの数',0,5,0)
 lenaso = int(numr)+int(gap)+int(numl)+int(tail)
 
 st.sidebar.write('ASO鎖長',lenaso)
-st.write('配列長:',len(seq1))
+st.write('query配列長:',len(seq1))
 
 seq1r=str(seq1.reverse_complement())
 seq2r=str(seq2.reverse_complement())
 seq3r=str(seq3.reverse_complement())
 
 #emptyリスト
-list_df = pd.DataFrame( columns=['ID','左翼',"ASO（5'to3'）",'右翼','GC%','cpg in gap','hom vs ref1', 'hom vs ref2'] )
+list_df = pd.DataFrame( columns=["No",'ID','左翼',"ASO（5'to3'）",'右翼','GC%','cpg in gap','hom vs ref1', 'hom vs ref2'] )
 #リスト追加（Seqクラスはstrに直してから使う）
 for i in range(len(seq1)-(int(numr)+int(gap)+int(numl)+int(tail))+1):
     tmp_se = pd.Series( 
-    [id1+"-"+str(int(len(seq1))-(i+1)-(lenaso)+2)+"-"+id2 ,  seq1r[i:i+int(numr)],
+    [int(len(seq1))-(i+1)-(lenaso)+2,
+    id1+"-"+str(int(len(seq1))-(i+1)-(lenaso)+2)+"-"+id2 ,  seq1r[i:i+int(numr)],
     seq1r[i:i+int(numr)]
     +seq1r[i+int(numr): i+int(numr)+int(gap)].lower()
     +seq1r[i+ int(numr)+ int(gap):i+ int(numr)+ int(gap)+ int(numl)]
@@ -46,9 +47,12 @@ for i in range(len(seq1)-(int(numr)+int(gap)+int(numl)+int(tail))+1):
     ,index=list_df.columns )
     list_df = list_df.append( tmp_se, ignore_index=True )
 
-st.dataframe(list_df)
+st.dataframe(list_df.sort_values("No"))
 
 csv = list_df.to_csv(index=False)  
 b64 = base64.b64encode(csv.encode()).decode()
 href = f'<a href="data:application/octet-stream;base64,{b64}" download="result.csv">download</a>'
 st.markdown(f" CSVとしてダウンロードする： {href}", unsafe_allow_html=True)
+
+st.write("query配列（5'to3'）:",seq1)
+st.write("query逆相補鎖配列（5'to3'）: ",seq1.reverse_complement())
