@@ -18,9 +18,9 @@ numr = st.sidebar.slider('左翼の数', 0, 5,3)
 gap = st.sidebar.slider('ギャップの数',0,15,8)
 numl = st.sidebar.slider('右翼の数',0,5,3)
 tail = st.sidebar.slider('テイルの数',0,5,0)
+lenaso = int(numr)+int(gap)+int(numl)+int(tail)
 
-
-st.sidebar.write('ASO鎖長',int(numr)+int(gap)+int(numl)+int(tail))
+st.sidebar.write('ASO鎖長',lenaso)
 st.write('配列長:',len(seq1))
 
 seq1r=str(seq1.reverse_complement())
@@ -32,7 +32,7 @@ list_df = pd.DataFrame( columns=['ID','左翼',"ASO（5'to3'）",'右翼','GC%',
 #リスト追加（Seqクラスはstrに直してから使う）
 for i in range(len(seq1)-(int(numr)+int(gap)+int(numl)+int(tail))+1):
     tmp_se = pd.Series( 
-    [id1+"-"+str(i+1)+"-"+id2 ,  seq1r[i:i+int(numr)],
+    [id1+"-"+str(int(len(seq1))-(i+1)-(lenaso)+2)+"-"+id2 ,  seq1r[i:i+int(numr)],
     seq1r[i:i+int(numr)]
     +seq1r[i+int(numr): i+int(numr)+int(gap)].lower()
     +seq1r[i+ int(numr)+ int(gap):i+ int(numr)+ int(gap)+ int(numl)]
