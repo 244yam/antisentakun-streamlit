@@ -49,7 +49,7 @@ for i in range(len(seq1)-(int(numr)+int(gap)+int(numl)+int(tail))+1):
 
 st.dataframe(list_df.sort_values("No"))
 
-csv = list_df.to_csv(index=False)  
+csv = list_df.sort_values("No").to_csv(index=False)  
 b64 = base64.b64encode(csv.encode()).decode()
 href = f'<a href="data:application/octet-stream;base64,{b64}" download="result.csv">download</a>'
 st.markdown(f" CSVとしてダウンロードする： {href}", unsafe_allow_html=True)
