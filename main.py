@@ -22,7 +22,6 @@ tail = st.sidebar.slider('テイルの数',0,5,0)
 
 st.sidebar.write('ASO鎖長',int(numr)+int(gap)+int(numl)+int(tail))
 st.write('配列長:',len(seq1))
-st.write('相補鎖:',seq1.reverse_complement())
 
 seq1r=str(seq1.reverse_complement())
 seq2r=str(seq2.reverse_complement())
