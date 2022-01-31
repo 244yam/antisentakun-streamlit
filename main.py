@@ -18,6 +18,7 @@ numr = st.sidebar.slider('左翼の数', 0, 5,3)
 gap = st.sidebar.slider('ギャップの数',0,15,8)
 numl = st.sidebar.slider('右翼の数',0,5,3)
 tail = st.sidebar.slider('テイルの数',0,5,0)
+mRNA = st.sidebar.slider('mRNA snippet',0,50,25)
 lenaso = int(numr)+int(gap)+int(numl)+int(tail)
 
 st.sidebar.write('ASO鎖長',lenaso)
@@ -28,7 +29,7 @@ seq2r=str(seq2.reverse_complement())
 seq3r=str(seq3.reverse_complement())
 
 #emptyリスト
-list_df = pd.DataFrame( columns=["No",'ID','左翼',"ASO（5'to3'）",'右翼','GC%','cpg in gap','hom vs ref1', 'hom vs ref2'] )
+list_df = pd.DataFrame( columns=["No",'ID','5wing',"ASO（5'to3'）",'3wing','GC%','cpg in gap','hom vs ref1', 'hom vs ref2', 'mRNA snippet'] )
 #リスト追加（Seqクラスはstrに直してから使う）
 for i in range(len(seq1)-(int(numr)+int(gap)+int(numl)+int(tail))+1):
     tmp_se = pd.Series( 
@@ -42,7 +43,7 @@ for i in range(len(seq1)-(int(numr)+int(gap)+int(numl)+int(tail))+1):
     GC(seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))]),
      "cg" in seq1r[i+int(numr): i+int(numr)+int(gap)].lower(),
      seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))] in seq2r,
-     seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))] in seq3r
+     seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))] in seq3r, seq1[i:i+int(mRNA)]
     ]
     ,index=list_df.columns )
     list_df = list_df.append( tmp_se, ignore_index=True )
