@@ -25,6 +25,7 @@ st.sidebar.write('ASO鎖長',lenaso)
 st.write('query配列長:',len(seq1))
 
 seq1r=str(seq1.reverse_complement())
+seq1f=str(seq1)
 seq2r=str(seq2.reverse_complement())
 seq3r=str(seq3.reverse_complement())
 
