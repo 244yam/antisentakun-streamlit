@@ -44,7 +44,7 @@ for i in range(len(seq1)-(int(numr)+int(gap)+int(numl)+int(tail))+1):
     GC(seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))]),
      "cg" in seq1r[i+int(numr): i+int(numr)+int(gap)].lower(),
      seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))] in seq2r,
-     seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))] in seq3r, seq1[i:i+int(mRNA)]
+     seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))] in seq3r, seq1f[i:i+int(mRNA)]
     ]
     ,index=list_df.columns )
     list_df = list_df.append( tmp_se, ignore_index=True )
