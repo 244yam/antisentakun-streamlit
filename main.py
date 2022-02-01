@@ -3,6 +3,7 @@ import pandas as pd
 from Bio.Seq import Seq
 from Bio.SeqUtils import GC
 import base64
+import RNA
 
 st.header('アンチ選択くん')
 id1 = st.sidebar.text_input('遺伝子名','Gapdh')
@@ -26,7 +27,6 @@ st.write('query配列長:',len(seq1))
 
 seq1r=str(seq1.reverse_complement())
 seq1f=str(seq1)
-
 seq2r=str(seq2.reverse_complement())
 seq3r=str(seq3.reverse_complement())
 
@@ -46,24 +46,25 @@ for i in range(len(seq1)-(int(numr)+int(gap)+int(numl)+int(tail))+1):
      "cg" in seq1r[i+int(numr): i+int(numr)+int(gap)].lower(),
      seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))] in seq2r,
      seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))] in seq3r]
+    
     ,index=list_df.columns )
     list_df = list_df.append( tmp_se, ignore_index=True )
+
 st.dataframe(list_df.sort_values("No"))
-    
-list2_df = pd.DataFrame( columns=["No","snippet"])
- 
-    
-for j in range(len(seq1)-int(mRNA)+1):
+
+list2_df = pd.DataFrame( columns=["No","snippet", "rev_compl"])
+
+for i in range(len(seq1)-int(mRNA)+1):
     tmp2_se = pd.Series(
-        [j+1, seq1f[j:j+int(mRNA)]]
+        [i+1, seq1f[i:i+int(mRNA)], str(seq1[i:i+int(mRNA)].reverse_complement())]
     ,index=list2_df.columns
     )
     list2_df = list2_df.append( tmp2_se, ignore_index=True )
+
 st.dataframe(list2_df.sort_values("No"))
 
-
-csv = list_df.sort_values("No").to_csv(index=False)  
-b64 = base64.b64encode(csv.encode()).decode()
+csv1 = list_df.sort_values("No").to_csv(index=False)  
+b64 = base64.b64encode(csv1.encode()).decode()
 href = f'<a href="data:application/octet-stream;base64,{b64}" download="result.csv">download</a>'
 st.markdown(f" CSV1としてダウンロードする： {href}", unsafe_allow_html=True)
 
