@@ -65,12 +65,12 @@ st.dataframe(list2_df.sort_values("No"))
 csv = list_df.sort_values("No").to_csv(index=False)  
 b64 = base64.b64encode(csv.encode()).decode()
 href = f'<a href="data:application/octet-stream;base64,{b64}" download="result.csv">download</a>'
-st.markdown(f" CSVとしてダウンロードする： {href}", unsafe_allow_html=True)
+st.markdown(f" CSV1としてダウンロードする： {href}", unsafe_allow_html=True)
 
 csv2 = list2_df.sort_values("No").to_csv(index=False)  
-b65 = base64.b64encode(csv.encode()).decode()
+b65 = base64.b64encode(csv2.encode()).decode()
 href = f'<a href="data:application/octet-stream;base64,{b65}" download="result2.csv">download</a>'
-st.markdown(f" CSVとしてダウンロードする： {href}", unsafe_allow_html=True)
+st.markdown(f" CSV2としてダウンロードする： {href}", unsafe_allow_html=True)
 
 st.write("query配列（5'to3'）:",seq1)
 st.write("query逆相補鎖配列（5'to3'）: ",seq1.reverse_complement())
