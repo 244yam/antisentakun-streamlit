@@ -49,6 +49,7 @@ for i in range(len(seq1)-(int(numr)+int(gap)+int(numl)+int(tail))+1):
     list_df = list_df.append( tmp_se, ignore_index=True )
 
 st.dataframe(list_df.sort_values("No"))
+break
 
 list2_df = pd.DataFrame( columns=["No","snippet"])
 
@@ -65,6 +66,7 @@ csv = list_df.sort_values("No").to_csv(index=False)
 b64 = base64.b64encode(csv.encode()).decode()
 href = f'<a href="data:application/octet-stream;base64,{b64}" download="result.csv">download</a>'
 st.markdown(f" CSVとしてダウンロードする： {href}", unsafe_allow_html=True)
+break
 
 csv2 = list2_df.sort_values("No").to_csv(index=False)  
 b65 = base64.b64encode(csv.encode()).decode()
