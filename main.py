@@ -25,12 +25,12 @@ st.sidebar.write('ASO鎖長',lenaso)
 st.write('query配列長:',len(seq1))
 
 seq1r=str(seq1.reverse_complement())
-seq1f=str(seq1)
+seq1f=str(seq1.reverse())
 seq2r=str(seq2.reverse_complement())
 seq3r=str(seq3.reverse_complement())
 
 #emptyリスト
-list_df = pd.DataFrame( columns=["No",'ID','5wing',"ASO（5'to3'）",'3wing','GC%','cpg in gap','hom vs ref1', 'hom vs ref2', 'mRNA snippet'] )
+list_df = pd.DataFrame( columns=["No",'ID','5wing',"ASO（5'to3'）",'3wing','GC%','cpg in gap','hom vs ref1', 'hom vs ref2'] )
 #リスト追加（Seqクラスはstrに直してから使う）
 for i in range(len(seq1)-(int(numr)+int(gap)+int(numl)+int(tail))+1):
     tmp_se = pd.Series( 
@@ -44,16 +44,32 @@ for i in range(len(seq1)-(int(numr)+int(gap)+int(numl)+int(tail))+1):
     GC(seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))]),
      "cg" in seq1r[i+int(numr): i+int(numr)+int(gap)].lower(),
      seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))] in seq2r,
-     seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))] in seq3r, seq1f[i:i+int(mRNA)]
+     seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))] in seq3r]
     ]
     ,index=list_df.columns )
     list_df = list_df.append( tmp_se, ignore_index=True )
 
 st.dataframe(list_df.sort_values("No"))
 
+list2_df = pd.DataFrame( columns=["No","snippet"])
+
+for i in range(len(seq1)-int(mRNA)+1)
+    tmp2_se = pd.Series(
+        [i+1, seq1f[i:i+int(mRNA)]]
+    ,index=list2_df.columns
+    )
+    list2_df = list2_df.append( tmp2_se, ignore_index=True )
+
+st.dataframe(list2_df.sort_values("No"))
+
 csv = list_df.sort_values("No").to_csv(index=False)  
 b64 = base64.b64encode(csv.encode()).decode()
 href = f'<a href="data:application/octet-stream;base64,{b64}" download="result.csv">download</a>'
+st.markdown(f" CSVとしてダウンロードする： {href}", unsafe_allow_html=True)
+
+csv2 = list2_df.sort_values("No").to_csv(index=False)  
+b65 = base64.b64encode(csv.encode()).decode()
+href = f'<a href="data:application/octet-stream;base64,{b65}" download="result2.csv">download</a>'
 st.markdown(f" CSVとしてダウンロードする： {href}", unsafe_allow_html=True)
 
 st.write("query配列（5'to3'）:",seq1)
