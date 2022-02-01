@@ -59,7 +59,7 @@ for j in range(len(seq1)-int(mRNA)+1):
     ,index=list2_df.columns
     )
     list2_df = list2_df.append( tmp2_se, ignore_index=True )
-    st.dataframe(list2_df.sort_values("No"))
+st.dataframe(list2_df.sort_values("No"))
 
 
 csv = list_df.sort_values("No").to_csv(index=False)  
