@@ -52,7 +52,7 @@ st.dataframe(list_df.sort_values("No"))
 
 list2_df = pd.DataFrame( columns=["No","snippet"])
 
-for i in range(len(seq1)-int(mRNA)+1)
+for i in range(len(seq1)-int(mRNA)+1):
     tmp2_se = pd.Series(
         [i+1, seq1f[i:i+int(mRNA)]]
     ,index=list2_df.columns
