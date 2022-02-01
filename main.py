@@ -47,9 +47,9 @@ for i in range(len(seq1)-(int(numr)+int(gap)+int(numl)+int(tail))+1):
      seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))] in seq3r]
     ,index=list_df.columns )
     list_df = list_df.append( tmp_se, ignore_index=True )
+    break
 
 st.dataframe(list_df.sort_values("No"))
-break
 
 list2_df = pd.DataFrame( columns=["No","snippet"])
 
@@ -59,6 +59,7 @@ for i in range(len(seq1)-int(mRNA)+1):
     ,index=list2_df.columns
     )
     list2_df = list2_df.append( tmp2_se, ignore_index=True )
+    break
 
 st.dataframe(list2_df.sort_values("No"))
 
@@ -66,7 +67,6 @@ csv = list_df.sort_values("No").to_csv(index=False)
 b64 = base64.b64encode(csv.encode()).decode()
 href = f'<a href="data:application/octet-stream;base64,{b64}" download="result.csv">download</a>'
 st.markdown(f" CSVとしてダウンロードする： {href}", unsafe_allow_html=True)
-break
 
 csv2 = list2_df.sort_values("No").to_csv(index=False)  
 b65 = base64.b64encode(csv.encode()).decode()
