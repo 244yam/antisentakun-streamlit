@@ -34,6 +34,7 @@ seq3r=str(seq3.reverse_complement())
 list_df = pd.DataFrame( columns=["No",'ID','5wing',"ASO（5'to3'）",'3wing','GC%','cpg in gap','hom vs ref1', 'hom vs ref2', 'fold'] )
 #リスト追加（Seqクラスはstrに直してから使う）
 for i in range(len(seq1)-(int(numr)+int(gap)+int(numl)+int(tail))+1):
+    (ss1, mfe) = RNA.fold(seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))])
     tmp_se = pd.Series( 
     [int(len(seq1))-(i+1)-(lenaso)+2,
     id1+"-"+str(int(len(seq1))-(i+1)-(lenaso)+2)+"-"+id2 ,  seq1r[i:i+int(numr)],
@@ -46,7 +47,7 @@ for i in range(len(seq1)-(int(numr)+int(gap)+int(numl)+int(tail))+1):
      "cg" in seq1r[i+int(numr): i+int(numr)+int(gap)].lower(),
      seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))] in seq2r,
      seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))] in seq3r,
-    RNA.fold(seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))])]
+    mfe]
     ,index=list_df.columns )
     list_df = list_df.append( tmp_se, ignore_index=True )
 st.dataframe(list_df.sort_values("No"))
