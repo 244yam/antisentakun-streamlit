@@ -48,7 +48,7 @@ for i in range(len(seq1)-(int(numr)+int(gap)+int(numl)+int(tail))+1):
     ,index=list_df.columns )
     list_df = list_df.append( tmp_se, ignore_index=True )
     st.dataframe(list_df.sort_values("No"))
-    breka
+    brake
 list2_df = pd.DataFrame( columns=["No","snippet"])
  
     
