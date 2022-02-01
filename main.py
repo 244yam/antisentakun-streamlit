@@ -45,7 +45,6 @@ for i in range(len(seq1)-(int(numr)+int(gap)+int(numl)+int(tail))+1):
      "cg" in seq1r[i+int(numr): i+int(numr)+int(gap)].lower(),
      seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))] in seq2r,
      seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))] in seq3r]
-    ]
     ,index=list_df.columns )
     list_df = list_df.append( tmp_se, ignore_index=True )
 
