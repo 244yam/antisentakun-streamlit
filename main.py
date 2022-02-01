@@ -5,6 +5,7 @@ from Bio.SeqUtils import GC
 import base64
 import RNA
 
+
 st.header('アンチ選択くん')
 id1 = st.sidebar.text_input('遺伝子名','Gapdh')
 id2 = st.sidebar.text_input('Suffix（例：ASO(14)）','ASO(14)')
@@ -63,15 +64,11 @@ for i in range(len(seq1)-int(mRNA)+1):
 
 st.dataframe(list2_df.sort_values("No"))
 
-csv1 = list_df.sort_values("No").to_csv(index=False)  
-b64 = base64.b64encode(csv1.encode()).decode()
-href = f'<a href="data:application/octet-stream;base64,{b64}" download="result.csv">download</a>'
-st.markdown(f" CSV1としてダウンロードする： {href}", unsafe_allow_html=True)
+csv1 = list_df.sort_values("No").to_csv(index=False) 
+st.download_button('Download CSV1', csv1, 'text/csv')
 
-csv2 = list2_df.sort_values("No").to_csv(index=False)  
-b65 = base64.b64encode(csv2.encode()).decode()
-href = f'<a href="data:application/octet-stream;base64,{b65}" download="result2.csv">download</a>'
-st.markdown(f" CSV2としてダウンロードする： {href}", unsafe_allow_html=True)
+csv2 = list2_df.sort_values("No").to_csv(index=False) 
+st.download_button('Download CSV2', csv2, 'text/csv') 
 
-st.write("query配列（5'to3'）:",seq1)
-st.write("query逆相補鎖配列（5'to3'）: ",seq1.reverse_complement())
+#st.write("query配列（5'to3'）:",seq1)
+#st.write("query逆相補鎖配列（5'to3'）: ",seq1.reverse_complement())
