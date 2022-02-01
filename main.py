@@ -3,7 +3,7 @@ import pandas as pd
 from Bio.Seq import Seq
 from Bio.SeqUtils import GC
 import base64
-from ViennaRNA import RNAfold
+import RNA
 
 st.header('アンチ選択くん')
 id1 = st.sidebar.text_input('遺伝子名','Gapdh')
