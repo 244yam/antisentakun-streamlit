@@ -53,14 +53,14 @@ st.dataframe(list_df.sort_values("No"))
 list2_df = pd.DataFrame( columns=["No","snippet"])
  
     
-for i in range(len(seq1)-int(mRNA)+1):
+for j in range(len(seq1)-int(mRNA)+1):
     tmp2_se = pd.Series(
-        [i+1, seq1f[i:i+int(mRNA)]]
+        [j+1, seq1f[j:j+int(mRNA)]]
     ,index=list2_df.columns
     )
     list2_df = list2_df.append( tmp2_se, ignore_index=True )
     st.dataframe(list2_df.sort_values("No"))
-    break
+
 
 csv = list_df.sort_values("No").to_csv(index=False)  
 b64 = base64.b64encode(csv.encode()).decode()
