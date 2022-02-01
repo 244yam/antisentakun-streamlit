@@ -3,7 +3,7 @@ import pandas as pd
 from Bio.Seq import Seq
 from Bio.SeqUtils import GC
 import base64
-
+from RNA import RNA
 st.header('アンチ選択くん')
 id1 = st.sidebar.text_input('遺伝子名','Gapdh')
 id2 = st.sidebar.text_input('Suffix（例：ASO(14)）','ASO(14)')
@@ -31,7 +31,7 @@ seq2r=str(seq2.reverse_complement())
 seq3r=str(seq3.reverse_complement())
 
 #emptyリスト
-list_df = pd.DataFrame( columns=["No",'ID','5wing',"ASO（5'to3'）",'3wing','GC%','cpg in gap','hom vs ref1', 'hom vs ref2'] )
+list_df = pd.DataFrame( columns=["No",'ID','5wing',"ASO（5'to3'）",'3wing','GC%','cpg in gap','hom vs ref1', 'hom vs ref2', 'fold'] )
 #リスト追加（Seqクラスはstrに直してから使う）
 for i in range(len(seq1)-(int(numr)+int(gap)+int(numl)+int(tail))+1):
     tmp_se = pd.Series( 
@@ -45,7 +45,8 @@ for i in range(len(seq1)-(int(numr)+int(gap)+int(numl)+int(tail))+1):
     GC(seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))]),
      "cg" in seq1r[i+int(numr): i+int(numr)+int(gap)].lower(),
      seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))] in seq2r,
-     seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))] in seq3r]
+     seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))] in seq3r,
+    RNA.fold(seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))])]
     ,index=list_df.columns )
     list_df = list_df.append( tmp_se, ignore_index=True )
 st.dataframe(list_df.sort_values("No"))
