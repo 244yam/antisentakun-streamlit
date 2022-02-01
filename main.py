@@ -4,7 +4,6 @@ from Bio.Seq import Seq
 from Bio.SeqUtils import GC
 import base64
 
-
 st.header('アンチ選択くん')
 id1 = st.sidebar.text_input('遺伝子名','Gapdh')
 id2 = st.sidebar.text_input('Suffix（例：ASO(14)）','ASO(14)')
@@ -35,7 +34,6 @@ seq3r=str(seq3.reverse_complement())
 list_df = pd.DataFrame( columns=["No",'ID','5wing',"ASO（5'to3'）",'3wing','GC%','cpg in gap','hom vs ref1', 'hom vs ref2'] )
 #リスト追加（Seqクラスはstrに直してから使う）
 for i in range(len(seq1)-(int(numr)+int(gap)+int(numl)+int(tail))+1):
-
     tmp_se = pd.Series( 
     [int(len(seq1))-(i+1)-(lenaso)+2,
     id1+"-"+str(int(len(seq1))-(i+1)-(lenaso)+2)+"-"+id2 ,  seq1r[i:i+int(numr)],
