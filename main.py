@@ -3,7 +3,7 @@ import pandas as pd
 from Bio.Seq import Seq
 from Bio.SeqUtils import GC
 import base64
-import RNA
+#import RNA
 
 
 st.header('アンチ選択くん')
