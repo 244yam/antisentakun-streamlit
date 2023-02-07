@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 from Bio.Seq import Seq
 from Bio.SeqUtils import GC
-from Bio.SeqUtils import Bio.SeqUtils.MeltingTemp as mt
+import Bio.SeqUtils.MeltingTemp as mt
 import base64
 #import RNA
 
