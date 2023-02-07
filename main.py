@@ -21,8 +21,9 @@ numr = st.sidebar.slider('左翼の数', 0, 5,3)
 gap = st.sidebar.slider('ギャップの数',0,15,8)
 numl = st.sidebar.slider('右翼の数',0,5,3)
 tail = st.sidebar.slider('テイルの数',0,5,0)
-mRNA = st.sidebar.slider('mRNA snippet',0,50,25)
+
 lenaso = int(numr)+int(gap)+int(numl)+int(tail)
+mRNA = st.sidebar.slider('mRNA snippet',0,lenaso,25)
 
 st.sidebar.write('ASO鎖長',lenaso)
 st.write('query配列長:',len(seq1))
