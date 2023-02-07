@@ -4,7 +4,7 @@ from Bio.Seq import Seq
 from Bio.SeqUtils import GC
 from Bio.SeqUtils import MeltingTemp as mt
 import base64
-import RNA
+from seqfold import fold
 
 
 st.header('アンチ選択くん')
@@ -47,7 +47,7 @@ for i in range(len(seq1)-(int(numr)+int(gap)+int(numl)+int(tail))+1):
     seq1r[i+ int(numr)+ int(gap):i+ int(numr)+ int(gap)+ int(numl)],
     GC(seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))]),
     mt.Tm_NN(seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))]),
-    RNA.fold(seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))]).mfe(),
+    fold(seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))]),
      "cg" in seq1r[i+int(numr): i+int(numr)+int(gap)].lower(),
      seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))] in seq2r,
      seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))] in seq3r]
