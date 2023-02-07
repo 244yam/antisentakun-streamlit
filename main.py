@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 from Bio.Seq import Seq
 from Bio.SeqUtils import GC
-import Bio.SeqUtils.MeltingTemp as mt
+from Bio.SeqUtils import Bio.SeqUtils.MeltingTemp as mt
 import base64
 #import RNA
 
@@ -45,7 +45,7 @@ for i in range(len(seq1)-(int(numr)+int(gap)+int(numl)+int(tail))+1):
     +seq1r[i+ int(numr)+ int(gap)+ int(numl):i+ int(numr)+ int(gap)+ int(numl)+int(tail)].lower(),
     seq1r[i+ int(numr)+ int(gap):i+ int(numr)+ int(gap)+ int(numl)],
     GC(seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))]),
-    mt.seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))],
+    mt.seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))].lower(),
      "cg" in seq1r[i+int(numr): i+int(numr)+int(gap)].lower(),
      seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))] in seq2r,
      seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))] in seq3r]
