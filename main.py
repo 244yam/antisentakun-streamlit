@@ -82,7 +82,7 @@ uploaded_file = st.sidebar.file_uploader("予測したいファイルを選択")
 if uploaded_file is not None:
     predf = pd.read_csv(uploaded_file)
     st.write(predf)
-    st.write(predf.loc[0,0])
+    st.write(predf.iat[0,0])
     
     
 
