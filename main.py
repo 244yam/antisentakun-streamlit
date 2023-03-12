@@ -27,6 +27,11 @@ mRNA = st.sidebar.slider('mRNA snippet',0,50,int(lenaso))
 st.sidebar.write('ASO鎖長',lenaso)
 st.write('query配列長:',len(seq1))
 
+uploaded_file = st.sidebar.file_uploader("Choose a file")
+if uploaded_file is not None:
+    dataframe = pd.read_csv(uploaded_file)
+    st.write(dataframe)
+
 seq1r=str(seq1.reverse_complement())
 seq1f=str(seq1)
 seq2r=str(seq2.reverse_complement())
@@ -76,7 +81,4 @@ st.download_button('Download CSV2', csv2, 'text/csv')
 #st.write("query配列（5'to3'）:",seq1)
 #st.write("query逆相補鎖配列（5'to3'）: ",seq1.reverse_complement())
 
-uploaded_file = st.file_uploader("Choose a file")
-if uploaded_file is not None:
-    dataframe = pd.read_csv(uploaded_file)
-    st.write(dataframe)
+
