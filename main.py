@@ -81,10 +81,10 @@ st.download_button('Download CSV2', csv2, 'text/csv')
 uploaded_file = st.sidebar.file_uploader("予測したいファイルを選択")
 if uploaded_file is not None:
     predf = pd.read_csv(uploaded_file)
-    st.write(predf)
+    
     for i in len(predf):
         predf['dG'] = dg(predf.iat[i,0], temp =37.0)
-        
+        st.write(predf)
         
     
     
