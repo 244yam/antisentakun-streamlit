@@ -79,8 +79,9 @@ st.download_button('Download CSV2', csv2, 'text/csv')
 #st.write("query逆相補鎖配列（5'to3'）: ",seq1.reverse_complement())
 
 uploaded_file = st.sidebar.file_uploader("Choose a file")
-ulf = pd.read_csv(uploaded_file)
-st.write(ulf)
+if uploaded_file is not None:
+    dataframe = pd.read_csv(uploaded_file)
+    st.write(dataframe)
     
     
 
