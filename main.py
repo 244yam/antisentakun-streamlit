@@ -83,7 +83,8 @@ if uploaded_file is not None:
     predf = pd.read_csv(uploaded_file)
     
     for i in len(predf):
-        predf['dG'] = dg(str(predf.iat[i,0]), temp =37.0)
+        predf['dG'] = 
+        dg(predf.iat[i,0], temp =37.0)
 st.write(predf)
         
     
