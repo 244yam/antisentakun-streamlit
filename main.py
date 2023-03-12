@@ -84,7 +84,7 @@ if uploaded_file is not None:
     
     for i in len(predf):
         predf['dG'] = dg(str(predf.iat[i,0]), temp =37.0)
-        st.write(predf)
+st.write(predf)
         
     
     
