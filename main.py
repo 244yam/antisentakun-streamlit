@@ -6,7 +6,6 @@ from Bio.SeqUtils import MeltingTemp as mt
 import base64
 from seqfold import dg
 
-
 st.header('アンチ選太くん')
 id1 = st.sidebar.text_input('遺伝子名','Gapdh')
 id2 = st.sidebar.text_input('Suffix（例：ASO(14)）','ASO(14)')
