@@ -85,6 +85,7 @@ for trp in itertools.permutations(base, 3):
 tf = [] 
 list_tf = pd.DataFrame()
 dddf = pd.DataFrame()
+
 for i in tlist:
   for j in range(len(list_df)):
     list_tf.loc[j,i] = i in str(list_df["ASO（5'to3'）"].loc[j])
@@ -92,14 +93,13 @@ for i in tlist:
 fdf = dddf.join(list_tf)
 
 x = fdf.loc[:, 'atg':'CGT']
-t = fdf['ast']
 
 #決定木
 clf = pickle.load(open('yoshidamodel.pkl', 'rb'))
 
 pred = clf.predict(x)
-#tox = pd.DataFrame({'tox':pred})
-#fdf2 = fdf.join(tox)
+tox = pd.DataFrame({'tox':pred})
+fdf2 = fdf.join(tox)
 
 #=========================機械学習用===========ここまで
 
