@@ -91,7 +91,7 @@ for i in tlist:
 #fdf = dddf.join(list_tf)
 
 x = list_tf.loc[:, 'atg':'CGT']
-
+st.dataframe(x)
 
 #決定木
 #with open('yoshidamodel.pkl', 'rb') as f:
@@ -102,7 +102,7 @@ x = list_tf.loc[:, 'atg':'CGT']
 
 #=========================機械学習用===========ここまで
 
-st.dataframe(x.sort_values("No"))
+#st.dataframe(fdf2.sort_values("No"))
 
 list2_df = pd.DataFrame( columns=["No","snippet", "rev_compl"])
 
