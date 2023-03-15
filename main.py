@@ -91,13 +91,13 @@ for i in tlist:
 #fdf = dddf.join(list_tf)
 
 x = list_tf.loc[:, 'atg':'CGT']
-
+st.dataframe(x)
 #決定木
-with open('yoshidamodel.pkl', 'rb') as f:
-    ktg = pickle.load(f)
-    pred = ktg.predict(x)
-    tox = pd.DataFrame({'tox':pred})
-    fdf2 = fdf.join(tox)
+#with open('yoshidamodel.pkl', 'rb') as f:
+#    ktg = pickle.load(f)
+#    pred = ktg.predict(x)
+#    tox = pd.DataFrame({'tox':pred})
+#    fdf2 = fdf.join(tox)
 
 #=========================機械学習用===========ここまで
 
