@@ -89,11 +89,11 @@ for i in range(len(seq1)-int(mRNA)+1):
 
 st.dataframe(list2_df.sort_values("No"))
 
-csv1 = list_df.sort_values("No").to_csv(index=False) 
-st.download_button('Download CSV1', csv1, 'text/csv')
+csv1 = df2.sort_values("No").to_csv(index=False) 
+st.download_button('Download top table', csv1, 'text/csv')
 
 csv2 = list2_df.sort_values("No").to_csv(index=False) 
-st.download_button('Download CSV2', csv2, 'text/csv') 
+st.download_button('Download bottom table', csv2, 'text/csv') 
 
 #st.write("query配列（5'to3'）:",seq1)
 #st.write("query逆相補鎖配列（5'to3'）: ",seq1.reverse_complement())
