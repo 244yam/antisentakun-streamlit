@@ -6,6 +6,10 @@ from Bio.SeqUtils import MeltingTemp as mt
 import base64
 from seqfold import dg
 import itertools
+from sklearn.model_selection import train_test_split
+from sklearn import tree
+import numpy as np
+import pickle
 
 st.header('アンチ選太くん')
 id1 = st.sidebar.text_input('遺伝子名','Gapdh')
@@ -59,12 +63,24 @@ for i in range(len(seq1)-int(lenaso)+1):
     ,index=list_df.columns )
     list_df = list_df.append( tmp_se, ignore_index=True )
 #=========================機械学習用===========
+gfv = []
+tmv = []
+dgv = []
 
+for j in range(len(df)):
+  gfv.append(gf(list_df["ASO（5'to3'）"].loc[j]))
+  tmv.append(mt.Tm_NN(df["ASO（5'to3'）"].loc[j]))
+  dgv.append(dg(df["ASO（5'to3'）"].loc[j],temp = 37.0))
+  ddf = pd.DataFrame({'GC%': gfv, 'Tm':tmv, 'deltaG':dgv})
+  dddf = list_df.join(ddf)
+
+#トリプレット生成
 base = ['a', 't', 'g', 'c', 'A', 'T', 'G', 'C']
 tlist = []
 
 for trp in itertools.permutations(base, 3):
-  tlist.append(trp[0]+trp[1]+trp[2])
+      tlist.append(trp[0]+trp[1]+trp[2])
+
 #print(tlist)
 tf = [] 
 list_tf = pd.DataFrame()
@@ -72,11 +88,22 @@ list_tf = pd.DataFrame()
 for i in tlist:
   for j in range(len(list_df)):
     list_tf.loc[j,i] = i in str(list_df["ASO（5'to3'）"].loc[j])
-df2 = pd.concat([list_df, list_tf], axis =1)        
+#df2 = pd.concat([list_df, list_tf], axis =1)
+fdf = dddf.join(list_tf)
+
+x = fdf.loc[:, 'atg':'CGT']
+t = fdf['ast']
+
+#決定木
+clf = pickle.load(open('yoshidamodel.pkl', 'rb'))
+
+pred = clf.predict(x)
+#tox = pd.DataFrame({'tox':pred})
+#fdf2 = fdf.join(tox)
 
 #=========================機械学習用===========ここまで
 
-st.dataframe(df2.sort_values("No"))
+st.dataframe(fdf.sort_values("No"))
 
 list2_df = pd.DataFrame( columns=["No","snippet", "rev_compl"])
 
