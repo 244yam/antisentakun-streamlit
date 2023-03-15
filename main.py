@@ -93,8 +93,9 @@ for i in tlist:
 x = list_tf.loc[:, 'atg':'CGT']
 
 #決定木
-clf = pickle.load(open('yoshidamodel.pkl', 'rb')) as f:
-    pred = clf.predict(x)
+with open('yoshidamodel.pkl', 'rb')) as f:
+    ktg = pickle.load(f)
+    pred = ktg.predict(x)
     tox = pd.DataFrame({'tox':pred})
 fdf2 = fdf.join(tox)
 
