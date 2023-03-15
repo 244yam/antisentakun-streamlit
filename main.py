@@ -98,7 +98,7 @@ with open('yoshidamodel.pkl', 'rb') as f:
     ktg = pickle.load(f)
     pred = ktg.predict(fdf2)
     tox = pd.DataFrame({'tox':pred})
-    fdf3 = fdf.join(tox)
+    fdf3 = list_df.join(tox)
 
 #=========================機械学習用===========ここまで
 
