@@ -90,8 +90,8 @@ for i in tlist:
     list_tf.loc[j,i] = i in str(list_df["ASO（5'to3'）"].loc[j])
 #fdf = dddf.join(list_tf)
 
-x = list_tf.loc[:, 'atg':'CGT']
-st.dataframe(x)
+#x = list_tf.loc[:, 'atg':'CGT']
+st.dataframe(list_tf)
 
 #決定木
 #with open('yoshidamodel.pkl', 'rb') as f:
@@ -115,8 +115,8 @@ for i in range(len(seq1)-int(mRNA)+1):
 
 st.dataframe(list2_df.sort_values("No"))
 
-csv1 = df2.sort_values("No").to_csv(index=False) 
-st.download_button('Download top table', csv1, 'text/csv')
+#csv1 = df2.sort_values("No").to_csv(index=False) 
+#st.download_button('Download top table', csv1, 'text/csv')
 
 csv2 = list2_df.sort_values("No").to_csv(index=False) 
 st.download_button('Download bottom table', csv2, 'text/csv') 
