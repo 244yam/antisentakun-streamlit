@@ -5,6 +5,7 @@ from Bio.SeqUtils import GC
 from Bio.SeqUtils import MeltingTemp as mt
 import base64
 from seqfold import dg
+import itertools
 
 st.header('アンチ選太くん')
 id1 = st.sidebar.text_input('遺伝子名','Gapdh')
@@ -20,11 +21,13 @@ numr = st.sidebar.slider('左翼の数', 0, 5,3)
 gap = st.sidebar.slider('ギャップの数',0,15,8)
 numl = st.sidebar.slider('右翼の数',0,5,3)
 tail = st.sidebar.slider('テイルの数',0,5,0)
+motif = st.sidebar.slider('テイルの数',0,5,3)
 
 lenaso = int(numr)+int(gap)+int(numl)+int(tail)
 mRNA = st.sidebar.slider('mRNA snippet',0,50,int(lenaso))
 
 st.sidebar.write('ASO鎖長',lenaso)
+
 st.write('query配列長:',len(seq1))
 
 
@@ -55,8 +58,25 @@ for i in range(len(seq1)-int(lenaso)+1):
     
     ,index=list_df.columns )
     list_df = list_df.append( tmp_se, ignore_index=True )
+#=========================機械学習用===========
 
-st.dataframe(list_df.sort_values("No"))
+base = ['a', 't', 'g', 'c', 'A', 'T', 'G', 'C']
+tlist = []
+
+for trp in itertools.permutations(base, 3):
+  tlist.append(trp[0]+trp[1]+trp[2])
+#print(tlist)
+tf = [] 
+list_tf = pd.DataFrame()
+
+for i in tlist:
+  for j in range(len(list_df):
+    list_tf.loc[j,i] = i in str(list_df['ASO（5'to3'）'].loc[j])
+df2 = pd.concat([list_df, list_tf], axis =1)        
+
+#=========================機械学習用===========ここまで
+
+st.dataframe(df2.sort_values("No"))
 
 list2_df = pd.DataFrame( columns=["No","snippet", "rev_compl"])
 
@@ -78,15 +98,6 @@ st.download_button('Download CSV2', csv2, 'text/csv')
 #st.write("query配列（5'to3'）:",seq1)
 #st.write("query逆相補鎖配列（5'to3'）: ",seq1.reverse_complement())
 
-uploaded_file = st.sidebar.file_uploader("予測したいファイルを選択")
-if uploaded_file is not None:
-    predf = pd.read_csv(uploaded_file)
-    
-    for i in len(predf):
-        predf['dG'] = 
-        dg(predf.iat[i,0], temp =37.0)
-st.write(predf)
-        
     
     
 
