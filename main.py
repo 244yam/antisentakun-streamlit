@@ -67,7 +67,7 @@ gfv = []
 tmv = []
 dgv = []
 
-for j in range(len(df)):
+for j in range(len(list_df)):
   gfv.append(gf(list_df["ASO（5'to3'）"].loc[j]))
   tmv.append(mt.Tm_NN(list_df["ASO（5'to3'）"].loc[j]))
   dgv.append(dg(list_df["ASO（5'to3'）"].loc[j],temp = 37.0))
