@@ -89,8 +89,9 @@ for i in tlist:
   for j in range(len(list_df)):
     list_tf.loc[j,i] = i in str(list_df["ASO（5'to3'）"].loc[j])
 fdf = list_df.join(list_tf)
-#st.dataframe(fdf)
+st.dataframe(fdf)
 
+"""
 x = fdf.loc[:, 'atg':'CGT']
 
 #決定木
@@ -99,10 +100,10 @@ with open('yoshidamodel.pkl', 'rb') as f:
     pred = ktg.predict(x)
 tox = pd.DataFrame({'tox':pred})
 alldf = list_df.join(tox)
-
+"""
 #=========================機械学習用===========ここまで
-
-st.dataframe(alldf)
+"""コメントアウト
+#st.dataframe(alldf)
 
 list2_df = pd.DataFrame( columns=["No","snippet", "rev_compl"])
 
@@ -123,7 +124,6 @@ st.download_button('Download bottom table', csv2, 'text/csv')
 
 #st.write("query配列（5'to3'）:",seq1)
 #st.write("query逆相補鎖配列（5'to3'）: ",seq1.reverse_complement())
-
-    
+"""  
     
 
