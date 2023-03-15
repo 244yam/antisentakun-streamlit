@@ -84,7 +84,6 @@ for trp in itertools.permutations(base, 3):
 #print(tlist)
 tf = [] 
 list_tf = pd.DataFrame()
-dddf = pd.DataFrame()
 
 for i in tlist:
   for j in range(len(list_df)):
