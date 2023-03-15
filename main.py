@@ -90,7 +90,7 @@ for i in tlist:
     list_tf.loc[j,i] = i in str(list_df["ASO（5'to3'）"].loc[j])
 fdf = dddf.join(list_tf)
 
-x = fdf.loc[:, 'atg':'CGT']
+x = list_tf.loc[:, 'atg':'CGT']
 
 #決定木
 clf = pickle.load(open('yoshidamodel.pkl', 'rb'))
