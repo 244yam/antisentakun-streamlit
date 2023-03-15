@@ -88,7 +88,7 @@ list_tf = pd.DataFrame()
 for i in tlist:
   for j in range(len(list_df)):
     list_tf.loc[j,i] = i in str(list_df["ASO（5'to3'）"].loc[j])
-fdf = dddf.join(list_tf)
+#fdf = dddf.join(list_tf)
 
 x = list_tf.loc[:, 'atg':'CGT']
 
