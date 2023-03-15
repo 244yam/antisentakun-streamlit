@@ -72,7 +72,7 @@ for j in range(len(list_df)):
   tmv.append(mt.Tm_NN(list_df["ASO（5'to3'）"].loc[j]))
   dgv.append(dg(list_df["ASO（5'to3'）"].loc[j],temp = 37.0))
   ddf = pd.DataFrame({'GC%': gfv, 'Tm':tmv, 'deltaG':dgv})
-#  dddf = list_df.join(ddf)
+
 
 #トリプレット生成
 base = ['a', 't', 'g', 'c', 'A', 'T', 'G', 'C']
@@ -89,16 +89,16 @@ for i in tlist:
   for j in range(len(list_df)):
     list_tf.loc[j,i] = i in str(list_df["ASO（5'to3'）"].loc[j])
 fdf = list_df.join(list_tf)
+st.dataframe(fdf)
 
-fdf2 = fdf.loc[:, 'atg':'CGT']
-st.dataframe(fdf.sort_values("No"))
+x = fdf.loc[:, 'atg':'CGT']
 
 #決定木
 with open('yoshidamodel.pkl', 'rb') as f:
     ktg = pickle.load(f)
-    pred = ktg.predict(fdf2)
-    tox = pd.DataFrame({'tox':pred})
-    fdf3 = list_df.join(tox)
+    pred = ktg.predict(x)
+tox = pd.DataFrame({'tox':pred})
+fdf3 = list_df.join(tox)
 
 #=========================機械学習用===========ここまで
 
