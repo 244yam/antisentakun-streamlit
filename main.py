@@ -69,8 +69,8 @@ dgv = []
 
 for j in range(len(df)):
   gfv.append(gf(list_df["ASO（5'to3'）"].loc[j]))
-  tmv.append(mt.Tm_NN(df["ASO（5'to3'）"].loc[j]))
-  dgv.append(dg(df["ASO（5'to3'）"].loc[j],temp = 37.0))
+  tmv.append(mt.Tm_NN(list_df["ASO（5'to3'）"].loc[j]))
+  dgv.append(dg(list_df["ASO（5'to3'）"].loc[j],temp = 37.0))
   ddf = pd.DataFrame({'GC%': gfv, 'Tm':tmv, 'deltaG':dgv})
   dddf = list_df.join(ddf)
 
@@ -103,7 +103,7 @@ pred = clf.predict(x)
 
 #=========================機械学習用===========ここまで
 
-st.dataframe(fdf.sort_values("No"))
+st.dataframe(fdf2.sort_values("No"))
 
 list2_df = pd.DataFrame( columns=["No","snippet", "rev_compl"])
 
