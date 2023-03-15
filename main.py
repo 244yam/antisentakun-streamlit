@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 from Bio.Seq import Seq
-from Bio.SeqUtils import GC
+from Bio.SeqUtils import gc_fraction as gf
 from Bio.SeqUtils import MeltingTemp as mt
 import base64
 from seqfold import dg
