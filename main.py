@@ -88,10 +88,10 @@ list_tf = pd.DataFrame()
 for i in tlist:
   for j in range(len(list_df)):
     list_tf.loc[j,i] = i in str(list_df["ASO（5'to3'）"].loc[j])
-fdf = ddf.join(list_tf)
+fdf = list_df.join(list_tf)
 
 fdf2 = fdf.loc[:, 'atg':'CGT']
-st.dataframe(list_df.sort_values("No"))
+st.dataframe(fdf.sort_values("No"))
 
 #決定木
 with open('yoshidamodel.pkl', 'rb') as f:
