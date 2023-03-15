@@ -98,11 +98,11 @@ with open('yoshidamodel.pkl', 'rb') as f:
     ktg = pickle.load(f)
     pred = ktg.predict(x)
 tox = pd.DataFrame({'tox':pred})
-
+alldf = list_df.join(tox)
 
 #=========================機械学習用===========ここまで
 
-st.dataframe(tox)
+st.dataframe(alldf)
 
 list2_df = pd.DataFrame( columns=["No","snippet", "rev_compl"])
 
