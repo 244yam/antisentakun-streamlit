@@ -89,7 +89,7 @@ for i in tlist:
   for j in range(len(list_df)):
     list_tf.loc[j,i] = i in str(list_df["ASO（5'to3'）"].loc[j])
 fdf = list_df.join(list_tf)
-st.dataframe(fdf)
+#st.dataframe(fdf)
 
 x = fdf.loc[:, 'atg':'CGT']
 
@@ -115,8 +115,8 @@ for i in range(len(seq1)-int(mRNA)+1):
 
 st.dataframe(list2_df.sort_values("No"))
 
-#csv1 = df2.sort_values("No").to_csv(index=False) 
-#st.download_button('Download top table', csv1, 'text/csv')
+csv1 = alldf.sort_values("No").to_csv(index=False) 
+st.download_button('Download top table', csv1, 'text/csv')
 
 csv2 = list2_df.sort_values("No").to_csv(index=False) 
 st.download_button('Download bottom table', csv2, 'text/csv') 
