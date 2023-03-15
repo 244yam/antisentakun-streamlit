@@ -90,19 +90,19 @@ for i in tlist:
     list_tf.loc[j,i] = i in str(list_df["ASO（5'to3'）"].loc[j])
 fdf = ddf.join(list_tf)
 
-#x = list_tf.loc[:, 'atg':'CGT']
-st.dataframe(fdf)
+fdf2 = fdf.loc[:, 'atg':'CGT']
+st.dataframe(list_df.sort_values("No"))
 
 #決定木
-#with open('yoshidamodel.pkl', 'rb') as f:
-#    ktg = pickle.load(f)
-#    pred = ktg.predict(x)
-#    tox = pd.DataFrame({'tox':pred})
-#    fdf2 = fdf.join(tox)
+with open('yoshidamodel.pkl', 'rb') as f:
+    ktg = pickle.load(f)
+    pred = ktg.predict(fdf2)
+    tox = pd.DataFrame({'tox':pred})
+    fdf3 = fdf.join(tox)
 
 #=========================機械学習用===========ここまで
 
-#st.dataframe(fdf2.sort_values("No"))
+st.dataframe(dfd3)
 
 list2_df = pd.DataFrame( columns=["No","snippet", "rev_compl"])
 
