@@ -72,7 +72,7 @@ for j in range(len(list_df)):
   tmv.append(mt.Tm_NN(list_df["ASO（5'to3'）"].loc[j]))
   dgv.append(dg(list_df["ASO（5'to3'）"].loc[j],temp = 37.0))
   ddf = pd.DataFrame({'GC%': gfv, 'Tm':tmv, 'deltaG':dgv})
-  dddf = list_df.join(ddf)
+#  dddf = list_df.join(ddf)
 
 #トリプレット生成
 base = ['a', 't', 'g', 'c', 'A', 'T', 'G', 'C']
@@ -88,10 +88,10 @@ list_tf = pd.DataFrame()
 for i in tlist:
   for j in range(len(list_df)):
     list_tf.loc[j,i] = i in str(list_df["ASO（5'to3'）"].loc[j])
-#fdf = dddf.join(list_tf)
+fdf = ddf.join(list_tf)
 
 #x = list_tf.loc[:, 'atg':'CGT']
-st.dataframe(list_tf)
+st.dataframe(fdf)
 
 #決定木
 #with open('yoshidamodel.pkl', 'rb') as f:
