@@ -95,8 +95,8 @@ for i in tlist:
 fdf = list_df.join(list_tf)
 #st.dataframe(fdf)
 tdt = fdf.loc[:,'atg':'CGT']
-st.dataframe(tdt)
-"""
+＃st.dataframe(tdt)
+
 #決定木
 with open('yoshidamodel.pkl', 'rb') as f:
     ktg = pickle.load(f)
@@ -106,7 +106,6 @@ alldf = list_df.join(tox)
 
 #=========================機械学習用===========ここまで
 st.dataframe(alldf)
-"""
 
 list2_df = pd.DataFrame( columns=["No","snippet", "rev_compl"])
 
