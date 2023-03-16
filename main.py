@@ -3,7 +3,7 @@ import pandas as pd
 from Bio.Seq import Seq
 from Bio.SeqUtils import gc_fraction as gf
 from Bio.SeqUtils import MeltingTemp as mt
-import base64
+#import base64
 from seqfold import dg
 from itertools import permutations
 from sklearn.model_selection import train_test_split
