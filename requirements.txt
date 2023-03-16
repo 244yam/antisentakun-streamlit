@@ -5,3 +5,4 @@ seqfold
 scikit-learn
 pickel
 time
+itertools
