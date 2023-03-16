@@ -97,12 +97,12 @@ for i in tlist:
 fdf = list_df.join(list_tf)
 #st.dataframe(fdf)
 
-x = fdf.loc[:, 'atg':'CGT']
+tdt = fdf.loc[:,'atg':'CGT']
 
 #決定木
 with open('yoshidamodel.pkl', 'rb') as f:
     ktg = pickle.load(f)
-    pred = ktg.predict(x)
+    pred = ktg.predict(tdt)
 tox = pd.DataFrame({'tox':pred})
 alldf = list_df.join(tox)
 
