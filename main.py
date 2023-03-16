@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 from Bio.Seq import Seq
-from Bio.SeqUtils import gc_fraction as gf
+#from Bio.SeqUtils import gc_fraction as gf
 from Bio.SeqUtils import MeltingTemp as mt
 import base64
 from seqfold import dg
@@ -56,7 +56,7 @@ for i in range(len(seq1)-int(lenaso)+1):
     +seq1r[i+ int(numr)+ int(gap):i+ int(numr)+ int(gap)+ int(numl)]
     +seq1r[i+ int(numr)+ int(gap)+ int(numl):i+ int(numr)+ int(gap)+ int(numl)+int(tail)].lower(),
     seq1r[i+ int(numr)+ int(gap):i+ int(numr)+ int(gap)+ int(numl)],
-    gf(seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))]),
+    (seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))]),
     mt.Tm_NN(seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))]),
     dg(seq1r[i:i+(int(numr)+int(gap)+int(numl)+int(tail))],temp = 37.0),
      "cg" in seq1r[i+int(numr): i+int(numr)+int(gap)].lower(),
