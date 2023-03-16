@@ -95,7 +95,7 @@ for i in tlist:
 fdf = list_df.join(list_tf)
 #st.dataframe(fdf)
 tdt = fdf.loc[:,'atg':'CGT']
-＃st.dataframe(tdt)
+#st.dataframe(tdt)
 
 #決定木
 with open('yoshidamodel.pkl', 'rb') as f:
