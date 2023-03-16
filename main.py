@@ -9,7 +9,7 @@ from itertools import permutations
 from sklearn.model_selection import train_test_split
 from sklearn import tree
 import pickle
-import time
+from time import sleep
 
 st.header('アンチ選太くん')
 id1 = st.sidebar.text_input('遺伝子名','Gapdh')
