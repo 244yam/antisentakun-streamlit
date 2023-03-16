@@ -1,9 +1,15 @@
 import streamlit as st
 import pandas as pd
-#from Bio.Seq import Seq
-#from Bio.SeqUtils import gc_fraction as gf
-#from Bio.SeqUtils import MeltingTemp as mt
-
+from Bio.Seq import Seq
+from Bio.SeqUtils import gc_fraction as gf
+from Bio.SeqUtils import MeltingTemp as mt
+#import base64
+from seqfold import dg
+from itertools import permutations
+from sklearn.model_selection import train_test_split
+from sklearn import tree
+import pickle
+from time import sleep
 
 st.header('アンチ選太くん')
 id1 = st.sidebar.text_input('遺伝子名','Gapdh')
@@ -38,13 +44,6 @@ seq3r=str(seq3.reverse_complement())
 latest_iteration = st.empty()
 bar = st.progress(0)
 
-#import base64
-from seqfold import dg
-from itertools import permutations
-from sklearn.model_selection import train_test_split
-from sklearn import tree
-import pickle
-from time import sleep
 
 #emptyリスト
 list_df = pd.DataFrame( columns=["No",'ID','5wing',"ASO（5'to3'）",'3wing','GC%','Tm','deltaG', 'cpg in gap','hom vs ref1', 'hom vs ref2'] )
