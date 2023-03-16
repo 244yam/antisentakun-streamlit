@@ -1,8 +1,8 @@
 import streamlit as st
 import pandas as pd
-from Bio.Seq import Seq
-from Bio.SeqUtils import gc_fraction as gf
-from Bio.SeqUtils import MeltingTemp as mt
+#from Bio.Seq import Seq
+#from Bio.SeqUtils import gc_fraction as gf
+#from Bio.SeqUtils import MeltingTemp as mt
 
 
 st.header('アンチ選太くん')
