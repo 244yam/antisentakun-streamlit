@@ -5,7 +5,7 @@ from Bio.Seq import Seq
 from Bio.SeqUtils import MeltingTemp as mt
 import base64
 from seqfold import dg
-import itertools
+from itertools import permutations
 from sklearn.model_selection import train_test_split
 from sklearn import tree
 import pickle
