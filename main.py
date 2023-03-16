@@ -66,17 +66,7 @@ for i in range(len(seq1)-int(lenaso)+1):
     
     ,index=list_df.columns )
     list_df = list_df.append( tmp_se, ignore_index=True )
-#=========================機械学習用===========
-#gfv = []
-#tmv = []
-#dgv = []
-
-#for j in range(len(list_df)):
-#  gfv.append(gf(list_df["ASO（5'to3'）"].loc[j]))
-#  tmv.append(mt.Tm_NN(list_df["ASO（5'to3'）"].loc[j]))
-#  dgv.append(dg(list_df["ASO（5'to3'）"].loc[j],temp = 37.0))
-#  ddf = pd.DataFrame({'GC%': gfv, 'Tm':tmv, 'deltaG':dgv})
-
+st.dataframe(list_df)
 
 #トリプレット生成
 base = ['a', 't', 'g', 'c', 'A', 'T', 'G', 'C']
@@ -85,7 +75,7 @@ tlist = []
 for trp in itertools.permutations(base, 3):
       tlist.append(trp[0]+trp[1]+trp[2])
 
-#print(tlist)
+        #print(tlist)
 tf = [] 
 list_tf = pd.DataFrame()
 
@@ -97,32 +87,51 @@ fdf = list_df.join(list_tf)
 tdt = fdf.loc[:,'atg':'CGT']
 #st.dataframe(tdt)
 
-#決定木
-with open('yoshidamodel.pkl', 'rb') as f:
-    ktg = pickle.load(f)
-    pred = ktg.predict(tdt)
+ml_menu = st.selectbox("実施する機械学習のタイプを選択してください", ["DecisionTree","RandomForest"])
+if ml_menu == "DecisionTree":
+    st.markdown("#### 機械学習を実行します")
+    execute = st.button("実行")
+    
+    if execute:
+        with open('yoshidamodel.pkl', 'rb') as f:
+            ktg = pickle.load(f)
+            for percent_complete in range(100):
+                time.sleep(0.02)
+                my_bar.progress(percent_complete + 1)
+        pred = ktg.predict(tdt)
 tox = pd.DataFrame({'tox':pred})
 alldf = list_df.join(tox)
-
-#=========================機械学習用===========ここまで
 st.dataframe(alldf)
+
+#=========================機械学習用===========
+#gfv = []
+#tmv = []
+#dgv = []
+
+#for j in range(len(list_df)):
+#  gfv.append(gf(list_df["ASO（5'to3'）"].loc[j]))
+#  tmv.append(mt.Tm_NN(list_df["ASO（5'to3'）"].loc[j]))
+#  dgv.append(dg(list_df["ASO（5'to3'）"].loc[j],temp = 37.0))
+#  ddf = pd.DataFrame({'GC%': gfv, 'Tm':tmv, 'deltaG':dgv})
+#=========================機械学習用===========ここまで
+
 
 list2_df = pd.DataFrame( columns=["No","snippet", "rev_compl"])
 
-for i in range(len(seq1)-int(mRNA)+1):
-    tmp2_se = pd.Series(
-        [i+1, seq1f[i:i+int(mRNA)], str(seq1[i:i+int(mRNA)].reverse_complement())]
-    ,index=list2_df.columns
-    )
-    list2_df = list2_df.append( tmp2_se, ignore_index=True )
+#for i in range(len(seq1)-int(mRNA)+1):
+#    tmp2_se = pd.Series(
+#        [i+1, seq1f[i:i+int(mRNA)], str(seq1[i:i+int(mRNA)].reverse_complement())]
+#    ,index=list2_df.columns
+#    )
+#    list2_df = list2_df.append( tmp2_se, ignore_index=True )
 
-st.dataframe(list2_df.sort_values("No"))
+#st.dataframe(list2_df.sort_values("No"))
 
 csv1 = alldf.sort_values("No").to_csv(index=False) 
 st.download_button('Download top table', csv1, 'text/csv')
 
-csv2 = list2_df.sort_values("No").to_csv(index=False) 
-st.download_button('Download bottom table', csv2, 'text/csv') 
+#csv2 = list2_df.sort_values("No").to_csv(index=False) 
+#st.download_button('Download bottom table', csv2, 'text/csv') 
 
 #st.write("query配列（5'to3'）:",seq1)
 #st.write("query逆相補鎖配列（5'to3'）: ",seq1.reverse_complement())
