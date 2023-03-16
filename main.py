@@ -10,6 +10,7 @@ from sklearn.model_selection import train_test_split
 from sklearn import tree
 import numpy as np
 import pickle
+import time
 
 st.header('アンチ選太くん')
 id1 = st.sidebar.text_input('遺伝子名','Gapdh')
@@ -40,6 +41,9 @@ seq1r=str(seq1.reverse_complement())
 seq1f=str(seq1)
 seq2r=str(seq2.reverse_complement())
 seq3r=str(seq3.reverse_complement())
+
+latest_iteration = st.empty()
+bar = st.progress(0)
 
 #emptyリスト
 list_df = pd.DataFrame( columns=["No",'ID','5wing',"ASO（5'to3'）",'3wing','GC%','Tm','deltaG', 'cpg in gap','hom vs ref1', 'hom vs ref2'] )
@@ -88,10 +92,11 @@ list_tf = pd.DataFrame()
 for i in tlist:
   for j in range(len(list_df)):
     list_tf.loc[j,i] = i in str(list_df["ASO（5'to3'）"].loc[j])
+    time.sleep(0.5)
+    
 fdf = list_df.join(list_tf)
-st.dataframe(fdf)
+#st.dataframe(fdf)
 
-"""
 x = fdf.loc[:, 'atg':'CGT']
 
 #決定木
@@ -100,10 +105,10 @@ with open('yoshidamodel.pkl', 'rb') as f:
     pred = ktg.predict(x)
 tox = pd.DataFrame({'tox':pred})
 alldf = list_df.join(tox)
-"""
+
 #=========================機械学習用===========ここまで
-"""コメントアウト
-#st.dataframe(alldf)
+
+st.dataframe(alldf)
 
 list2_df = pd.DataFrame( columns=["No","snippet", "rev_compl"])
 
@@ -124,6 +129,6 @@ st.download_button('Download bottom table', csv2, 'text/csv')
 
 #st.write("query配列（5'to3'）:",seq1)
 #st.write("query逆相補鎖配列（5'to3'）: ",seq1.reverse_complement())
-"""  
+
     
 
