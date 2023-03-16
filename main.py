@@ -11,7 +11,7 @@ from sklearn import tree
 import pickle
 import time
 
-@st.cache
+
 st.header('アンチ選太くん')
 id1 = st.sidebar.text_input('遺伝子名','Gapdh')
 id2 = st.sidebar.text_input('Suffix（例：ASO(14)）','ASO(14)')
