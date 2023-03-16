@@ -94,7 +94,8 @@ for i in tlist:
     list_tf.loc[j,i] = i in str(list_df["ASO（5'to3'）"].loc[j])
 fdf = list_df.join(list_tf)
 st.dataframe(fdf)
-""""
+
+"""
 tdt = fdf.loc[:,'atg':'CGT']
 
 #決定木
@@ -106,7 +107,7 @@ alldf = list_df.join(tox)
 
 #=========================機械学習用===========ここまで
 st.dataframe(alldf)
-""""
+"""
 
 list2_df = pd.DataFrame( columns=["No","snippet", "rev_compl"])
 
