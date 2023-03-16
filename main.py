@@ -5,11 +5,7 @@ from Bio.SeqUtils import gc_fraction as gf
 from Bio.SeqUtils import MeltingTemp as mt
 import base64
 from seqfold import dg
-import itertools
-from sklearn.model_selection import train_test_split
-from sklearn import tree
-import pickle
-import time
+
 
 
 st.header('アンチ選太くん')
@@ -71,6 +67,12 @@ st.dataframe(list_df)
 #トリプレット生成
 base = ['a', 't', 'g', 'c', 'A', 'T', 'G', 'C']
 tlist = []
+
+import itertools
+from sklearn.model_selection import train_test_split
+from sklearn import tree
+import pickle
+import time
 
 for trp in itertools.permutations(base, 3):
       tlist.append(trp[0]+trp[1]+trp[2])
