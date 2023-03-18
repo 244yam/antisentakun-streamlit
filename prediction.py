@@ -1,3 +1,5 @@
+! pip install biopython
+! pip install seqfold
 import streamlit as st
 import pandas as pd
 from Bio.Seq import Seq
