@@ -3,6 +3,6 @@ pandas
 biopython
 seqfold
 scikit-learn
-pickel
+pickle
 time
 itertools
