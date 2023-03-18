@@ -58,7 +58,7 @@ if ml_menu == "DecisionTree":
     execute = st.button("実行")
     
     if execute:
-        with open('/Users/tyamamoto/Documents/8000 長崎大学_事務関連/8015 Liid社関連/Liid研究/予測プログラム_機械学習など/antisentakun-streamlit-master/yoshidaBurdick_ki_model.pkl', 'rb') as f:
+        with open('yoshidaBurdick_ki_model.pkl', 'rb') as f:
             ktg = pickle.load(f)
         pred = ktg.predict(x)
     tox = pd.DataFrame({'tox_ki':pred})
@@ -74,7 +74,7 @@ elif ml_menu == "RandomForest":
     execute = st.button("実行")
   
     if execute:
-        with open('/Users/tyamamoto/Documents/8000 長崎大学_事務関連/8015 Liid社関連/Liid研究/予測プログラム_機械学習など/antisentakun-streamlit-master/yoshidaBurdick_mori_model.pkl', 'rb') as f:
+        with open('yoshidaBurdick_mori_model.pkl', 'rb') as f:
             ktg2 = pickle.load(f)  
         pred2 = ktg2.predict(x)
     tox2 = pd.DataFrame({'tox_mori':pred2})
