@@ -1,5 +1,6 @@
 ! pip install biopython
 ! pip install seqfold
+! pip install pickle
 import streamlit as st
 import pandas as pd
 from Bio.Seq import Seq
